@@ -1,2 +1,2 @@
 # .NetToolkit
-.Net based game server toolkit
+DotNet based game server toolkit

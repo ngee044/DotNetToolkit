@@ -58,7 +58,6 @@ public class Job
 		return priority_;
 	}
 
-	// 실제 작업을 실행
 	public (bool, string?) work()
 	{
 		if (callback_ == null)
