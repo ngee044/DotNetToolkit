@@ -13,7 +13,7 @@ public class JobPool
 		lock_condition_ = false;
 	}
 
-	public (bool, string?) push(Job job)
+	public (bool, string?) Push(Job job)
 	{
 		if (job == null)
 		{
@@ -31,7 +31,7 @@ public class JobPool
 		return (true, null);
 	}
 
-	public Job? pop(IEnumerable<JobPriorities> priorities)
+	public Job? Pop(IEnumerable<JobPriorities> priorities)
 	{
 		foreach (var prio in priorities)
 		{
@@ -46,15 +46,15 @@ public class JobPool
 		return null;
 	}
 
-	public void clear() => job_queues_.Clear();
+	public void Clear() => job_queues_.Clear();
 
-	public void clear(JobPriorities priority)
+	public void Clear(JobPriorities priority)
 		=> job_queues_.TryRemove(priority, out _);
 
 	public void lock_(bool condition) => lock_condition_ = condition;
 	public bool lock_() => lock_condition_;
 
-	public long job_count(IEnumerable<JobPriorities> priorities)
+	public long JobCount(IEnumerable<JobPriorities> priorities)
 	{
 		if (priorities == null)
 		{

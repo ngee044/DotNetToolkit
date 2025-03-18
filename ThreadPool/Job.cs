@@ -29,12 +29,12 @@ public class Job
 		job_pool_ = new System.WeakReference<JobPool>(null);
 	}
 
-	public void job_pool(JobPool pool)
+	public void JobPool(JobPool pool)
 	{
 		job_pool_ = new System.WeakReference<JobPool>(pool);
 	}
 
-	public JobPool get_job_pool()
+	public JobPool GetJobPool()
 	{
 		if (job_pool_.TryGetTarget(out var pool))
 		{
@@ -43,22 +43,22 @@ public class Job
 		return null;
 	}
 
-	public string title()
+	public string Title()
 	{
 		return title_;
 	}
 
-	public void title(string new_title)
+	public void Title(string new_title)
 	{
 		title_ = new_title;
 	}
 
-	public JobPriorities priority()
+	public JobPriorities Priority()
 	{
 		return priority_;
 	}
 
-	public (bool, string?) work()
+	public (bool, string?) Work()
 	{
 		if (callback_ == null)
 		{

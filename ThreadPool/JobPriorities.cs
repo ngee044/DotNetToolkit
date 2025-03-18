@@ -14,7 +14,7 @@ public enum JobPriorities
 
 public static class JobPrioritiesHelper
 {
-	public static string priority_string(JobPriorities priority) => priority switch
+	public static string PriorityKey(JobPriorities priority) => priority switch
 	{
 		JobPriorities.Top      => "Top",
 		JobPriorities.High     => "High",
@@ -24,6 +24,6 @@ public static class JobPrioritiesHelper
 		_                      => "Unknown"
 	};
 
-	public static string priority_string(IEnumerable<JobPriorities> priorities)
-		=> "[ " + string.Join(", ", priorities.Select(priority_string)) + " ]";
+	public static string PriorityKey(IEnumerable<JobPriorities> priorities)
+		=> "[ " + string.Join(", ", priorities.Select(PriorityKey)) + " ]";
 }

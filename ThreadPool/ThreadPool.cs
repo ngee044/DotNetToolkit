@@ -18,47 +18,47 @@ public class ThreadPool
         pause_ = false;
     }
 
-    public void thread_title(string new_title) => thread_title_ = new_title;
-    public string thread_title() => thread_title_;
+    public void ThreadTitle(string new_title) => thread_title_ = new_title;
+    public string ThreadTitle() => thread_title_;
 
-    public JobPool job_pool() => job_pool_;
+    public JobPool JobPool() => job_pool_;
 
-    public void push(ThreadWorker worker)
+    public void Push(ThreadWorker worker)
     {
         if (worker == null) return;
 
-        worker.job_pool(job_pool_);
-        worker.pause(pause_);
-        worker.worker_title($"{worker.worker_title()} on {thread_title_}");
+        worker.JobPool(job_pool_);
+        worker.Pause(pause_);
+        worker.WorkerTitle($"{worker.WorkerTitle()} on {thread_title_}");
 
         thread_workers_.Add(worker);
 
         if (working_)
         {
-            worker.start();
+            worker.Start();
         }
     }
 
-    public (bool, string?) push(Job job)
+    public (bool, string?) Push(Job job)
     {
         if (job_pool_ == null)
         {
             return (false, "cannot push a job into a null JobPool");
         }
 
-        var result = job_pool_.push(job);
+        var result = job_pool_.Push(job);
         if (result.Item1)
         {
             // notify all workers that handle this job's priority
             foreach (var worker in thread_workers_)
             {
-                worker.notify_one(job.priority());
+                worker.NotifyOne(job.Priority());
             }
         }
         return result;
     }
 
-    public (bool, string?) start()
+    public (bool, string?) Start()
     {
         if (working_)
         {
@@ -67,7 +67,7 @@ public class ThreadPool
 
         foreach (var worker in thread_workers_)
         {
-            var (ok, err) = worker.start();
+            var (ok, err) = worker.Start();
             if (!ok)
             {
                 return (false, err);
@@ -77,7 +77,7 @@ public class ThreadPool
         return (true, null);
     }
 
-    public void stop(bool stop_immediately)
+    public void Stop(bool stop_immediately)
     {
         if (!working_) return;
 
@@ -85,24 +85,24 @@ public class ThreadPool
 
         if (stop_immediately)
         {
-            job_pool_.clear();
+            job_pool_.Clear();
         }
 
         foreach (var w in thread_workers_)
         {
-            w.stop();
+            w.Stop();
         }
 
         job_pool_.lock_(false);
         working_ = false;
     }
 
-    public void pause(bool pause)
+    public void Pause(bool pause)
     {
         pause_ = pause;
         foreach (var w in thread_workers_)
         {
-            w.pause(pause);
+            w.Pause(pause);
         }
     }
 }

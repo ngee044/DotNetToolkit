@@ -26,15 +26,15 @@ public class ThreadWorker
         condition_ = new AutoResetEvent(false);
     }
 
-    public void job_pool(JobPool pool) => job_pool_ = new System.WeakReference<JobPool>(pool);
+    public void JobPool(JobPool pool) => job_pool_ = new System.WeakReference<JobPool>(pool);
 
-    public IEnumerable<JobPriorities> priorities() => priorities_;
-    public void priorities(IEnumerable<JobPriorities> new_priorities) => priorities_ = new_priorities.ToList();
+    public IEnumerable<JobPriorities> Priorities() => priorities_;
+    public void Priorities(IEnumerable<JobPriorities> new_priorities) => priorities_ = new_priorities.ToList();
 
-    public void worker_title(string title) => thread_worker_title_ = title;
-    public string worker_title() => thread_worker_title_;
+    public void WorkerTitle(string title) => thread_worker_title_ = title;
+    public string WorkerTitle() => thread_worker_title_;
 
-    public (bool, string?) start()
+    public (bool, string?) Start()
     {
         if (thread_ != null && thread_.IsAlive)
         {
@@ -48,7 +48,7 @@ public class ThreadWorker
         return (true, null);
     }
 
-    public (bool, string?) stop()
+    public (bool, string?) Stop()
     {
         if (thread_ == null)
         {
@@ -64,13 +64,13 @@ public class ThreadWorker
         return (true, null);
     }
 
-    public void pause(bool pause)
+    public void Pause(bool pause)
     {
         pause_ = pause;
         condition_.Set(); 
     }
 
-    public void notify_one(JobPriorities priority)
+    public void NotifyOne(JobPriorities priority)
     {
         if (priorities_.Contains(priority))
         {
@@ -78,7 +78,7 @@ public class ThreadWorker
         }
     }
 
-    private void run()
+    private void Run()
     {
         while (true)
         {
@@ -94,14 +94,14 @@ public class ThreadWorker
                 break;
             }
 
-            var job = pool.pop(priorities_);
+            var job = pool.Pop(priorities_);
             if (job == null)
             {
                 condition_.WaitOne(100);
                 continue;
             }
 
-            var (ok, error) = job.work();
+            var (ok, error) = job.Work();
             if (!ok)
             {
                 // 예: Console.WriteLine($"[Error] {error}");
