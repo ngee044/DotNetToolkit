@@ -42,7 +42,7 @@ public class ThreadWorker
         }
 
         thread_stop_ = false;
-        thread_ = new Thread(run) { IsBackground = true };
+        thread_ = new Thread(Run) { IsBackground = true };
         thread_.Start();
 
         return (true, null);

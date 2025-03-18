@@ -24,10 +24,10 @@ public class JobPool
 			return (false, "the system is locked; new tasks cannot be created");
 		}
 
-		var queue = job_queues_.GetOrAdd(job.priority(), _ => new ConcurrentQueue<Job>());
+		var queue = job_queues_.GetOrAdd(job.Priority(), _ => new ConcurrentQueue<Job>());
 		queue.Enqueue(job);
 
-		job.job_pool(this);
+		job.JobPool(this);
 		return (true, null);
 	}
 
