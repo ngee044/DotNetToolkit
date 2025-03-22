@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCService.Proto";
+
+service GameService {
+  // 클라이언트 -> 서버로 JSON 형식의 요청을 전송
+  rpc SendJsonPayload (JsonRequest) returns (JsonResponse);
+  
+  // 다른 서버(매치메이킹 서버 등) 간에 상호 호출 가능
+  rpc ServerToServerCall (JsonRequest) returns (JsonResponse);
+}
+
+message JsonRequest {
+  string jsonData = 1;
+}
+
+message JsonResponse {
+  string jsonData = 1;
+}

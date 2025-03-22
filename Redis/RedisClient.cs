@@ -3,29 +3,22 @@ using System;
 
 namespace Redis;
 
-public sealed class RedisClient : IDisposable
+public sealed class RedisClient(
+		string? connection_string = null,
+		bool use_aws_ecs = false,
+		TLSOptions? tls_options = null
+	) : IDisposable 
 {
 	private ConnectionMultiplexer? connection_;
 	private IDatabase? database_;
 
-	private readonly string? explicit_connection_string_;
-	private readonly bool use_aws_ecs_;
-	private readonly TLSOptions ? tls_options_;
+	private readonly string? explicit_connection_string_ = connection_string;
+	private readonly bool use_aws_ecs_ = use_aws_ecs;
+	private readonly TLSOptions ? tls_options_ = tls_options;
 
 	private const string ECS_ENDPOINT_ENV = "";
 	private const string ECS_PORT_ENV     = "REDIS_PORT";
     private const string ECS_PASSWORD_ENV = "REDIS_PASSWORD";
-
-	public RedisClient(
-		string? connection_string = null,
-		bool use_aws_ecs = false,
-		TLSOptions? tls_options = null
-	)
-	{
-		explicit_connection_string_ = connection_string;
-		use_aws_ecs_ = use_aws_ecs;
-		tls_options_ = tls_options;
-	}
 
 	public bool Connect()
 	{

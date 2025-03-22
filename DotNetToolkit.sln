@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.csproj", "{F9AA4B72-22E8-4F2D-A82A-FEE7B85D4BD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3F2F78A0-B5BD-4391-B419-A013D57F6392}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{F9AA4B72-22E8-4F2D-A82A-FEE7B85D4BD6}.Release|x64.Build.0 = Release|Any CPU
 		{F9AA4B72-22E8-4F2D-A82A-FEE7B85D4BD6}.Release|x86.ActiveCfg = Release|Any CPU
 		{F9AA4B72-22E8-4F2D-A82A-FEE7B85D4BD6}.Release|x86.Build.0 = Release|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Debug|x64.Build.0 = Debug|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Debug|x86.Build.0 = Debug|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Release|x64.ActiveCfg = Release|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Release|x64.Build.0 = Release|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Release|x86.ActiveCfg = Release|Any CPU
+		{3F2F78A0-B5BD-4391-B419-A013D57F6392}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

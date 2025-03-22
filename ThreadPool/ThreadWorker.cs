@@ -2,29 +2,17 @@ using System.Threading;
 
 namespace ThreadPool;
 
-public class ThreadWorker
+public class ThreadWorker(IEnumerable<JobPriorities> priorities, string worker_title)
 {
-    private string thread_worker_title_;
-    private List<JobPriorities> priorities_;
-    private System.WeakReference<JobPool> job_pool_;
+    private string thread_worker_title_ = worker_title;
+    private List<JobPriorities> priorities_ = priorities.ToList();
+    private System.WeakReference<JobPool> job_pool_ = new System.WeakReference<JobPool>(null);
 
-    private bool pause_;
-    private bool thread_stop_;
+    private bool pause_ = false;
+    private bool thread_stop_ = false;
 
     private Thread? thread_;
-    private AutoResetEvent condition_;
-
-    public ThreadWorker(IEnumerable<JobPriorities> priorities, string worker_title)
-    {
-        priorities_ = priorities.ToList();
-        thread_worker_title_ = worker_title;
-        job_pool_ = new System.WeakReference<JobPool>(null);
-
-        pause_ = false;
-        thread_stop_ = false;
-
-        condition_ = new AutoResetEvent(false);
-    }
+    private AutoResetEvent condition_ = new AutoResetEvent(false);
 
     public void JobPool(JobPool pool) => job_pool_ = new System.WeakReference<JobPool>(pool);
 

@@ -19,6 +19,7 @@ public class JobPool
 		{
 			return (false, "cannot push an empty job");
 		}
+		
 		if (lock_condition_)
 		{
 			return (false, "the system is locked; new tasks cannot be created");
@@ -65,9 +66,9 @@ public class JobPool
 		}
 
 		long count = 0;
-		foreach (var prio in priorities)
+		foreach (var priority in priorities)
 		{
-			if (job_queues_.TryGetValue(prio, out var queue))
+			if (job_queues_.TryGetValue(priority, out var queue))
 			{
 				count += queue.Count;
 			}

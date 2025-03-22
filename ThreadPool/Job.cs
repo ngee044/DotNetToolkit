@@ -2,39 +2,26 @@ using System;
 using System.Collections.Generic;
 
 namespace ThreadPool;
-public class Job
-{
-	private string title_;
-	private JobPriorities priority_;
-	private List<byte> data_;
-
-	private bool use_time_stamp_;
-
-	private readonly Func<(bool, string?)>? callback_;
-
-	private System.WeakReference<JobPool> job_pool_;
-
-	public Job(
+public class Job(
 		JobPriorities priority,
 		string title,
 		bool use_time_stamp = false,
 		Func<(bool, string?)>? callback = null)
-	{
-		priority_ = priority;
-		title_ = title;
-		use_time_stamp_ = use_time_stamp;
-		callback_ = callback;
+{
+	private string title_ = title;
+	private JobPriorities priority_ = priority;
+	private List<byte> data_ = new List<byte>();
 
-		data_ = new List<byte>();
-		job_pool_ = new System.WeakReference<JobPool>(null);
-	}
+	private bool use_time_stamp_ = use_time_stamp;
+	private readonly Func<(bool, string?)>? callback_ = callback;
+	private WeakReference<JobPool> job_pool_ = new WeakReference<JobPool>(null);
 
 	public void JobPool(JobPool pool)
 	{
-		job_pool_ = new System.WeakReference<JobPool>(pool);
+		job_pool_ = new WeakReference<JobPool>(pool);
 	}
 
-	public JobPool GetJobPool()
+	public JobPool? GetJobPool()
 	{
 		if (job_pool_.TryGetTarget(out var pool))
 		{
